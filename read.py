@@ -1,3 +1,6 @@
+import time
+
+
 def read_file(filename):
 	data = []
 	count = 0
@@ -8,11 +11,13 @@ def read_file(filename):
 			if count % 1000 == 0:#每一千筆印一次(進度條)
 				print(len(data))
 	print('檔案讀取完了，總共有', len(data), '筆資料')
-	print(data[0])
+	
 	return(data)
 
 
 def word(data):
+	start_time = time.time()
+	
 	wc = {} # word_count
 	for d in data:
 		words = d.split()
@@ -21,12 +26,14 @@ def word(data):
 				wc[word] += 1
 			else:
 				wc[word] = 1 #新增新的Key進wc字典
+	end_time = time.time()
+	print('花了', end_time - start_time, '秒')
 
-	for word in wc:
-		if wc[word] > 100000:# 若字出現過100次
-			print(word, wc[word])
+	# for word in wc:
+	# 	if wc[word] > 100000:# 若字出現過100次
+	# 		print(word, wc[word])
 
-	print (len(wc))
+	print ('總共有', len(wc), '種字')
 	while True:
 		word = input('請問你想查什麼字: ')
 		if word == 'q':
@@ -35,6 +42,8 @@ def word(data):
 			print(word, '出現過的次數為', wc[word])
 		else:
 			print('這個字沒有出現過喔!')
+	
+
 
 
 
